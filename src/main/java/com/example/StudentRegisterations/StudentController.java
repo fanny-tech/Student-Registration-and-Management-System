@@ -2,10 +2,7 @@ package com.example.StudentRegisterations;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/Student")
@@ -38,6 +35,18 @@ public class StudentController {
     public String listStudents(Model model) {
         model.addAttribute("students", studentServices.getAllStudent());
         return "student-list";
+    }
+
+    @GetMapping("/{id}")
+    public String getStudentById(@PathVariable("id") Long id, Model model) {
+        try {
+            Student student = studentServices.getStudentById(id);
+            model.addAttribute("student", student);
+            return "student-detail";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "error-page";
+        }
     }
 
 }
