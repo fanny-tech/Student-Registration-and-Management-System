@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>WELCOME TO REGISTRATION FORM </title>
+</head>
+<body>
+<h2> this is student data </h2>
+
+<div th:if="${errorMessage}" style="color:red;">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<form th:action="@{/students/register}" th:object="${student}" method="post">
+    <label>First Name:</label>
+    <input type="text" th:field="*{getFirst_name()}" required /><br/><br/>
+
+    <label>Last Name:</label>
+    <input type="text" th:field="*{getLast_name()}" required /><br/><br/>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required /><br/><br/>
+
+    <label>Age (Must be > 18):</label>
+    <input type="number" th:field="*{age}" min="19" required /><br/><br/>
+
+    <button type="submit">Emeza u kwandikisha</button>
+</form>
+
+<br/>
+<a th:href="@{/students/list}">Reba Urutonde lwe abanyeshuri</a>
+</body>
+</html>
